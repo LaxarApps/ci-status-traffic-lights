@@ -1,6 +1,9 @@
 var require = {
    baseUrl: 'bower_components',
-   deps: [],
+   deps: [
+      'promise-polyfill',
+      'fetch'
+   ],
    paths: {
       // LaxarJS Core and dependencies:
       laxar: 'laxar/dist/laxar.with-deps',
@@ -16,10 +19,6 @@ var require = {
       'laxar-patterns': 'laxar-patterns/dist/laxar-patterns',
       'json-patch': 'fast-json-patch/src/json-patch-duplex',
 
-      // LaxarJS UIKit:
-      'laxar-uikit': 'laxar-uikit/dist/laxar-uikit',
-      'laxar-uikit/controls': 'laxar-uikit/dist/controls',
-
       // LaxarJS application paths:
       'laxar-path-root': '..',
       'laxar-path-layouts': '../application/layouts',
@@ -27,7 +26,6 @@ var require = {
       'laxar-path-flow': '../application/flow/flow.json',
       'laxar-path-widgets': '../includes/widgets',
       'laxar-path-themes': '../includes/themes',
-      //'laxar-path-default-theme': 'laxar-uikit/dist/themes/default.theme',
       'laxar-path-default-theme': 'laxar-path-themes/themes/default.theme',
 
       // LaxarJS application modules (contents are generated):
@@ -35,14 +33,10 @@ var require = {
 
       // Testing: LaxarJS Mocks:
       'laxar-mocks': 'laxar-mocks/dist/laxar-mocks',
-      jasmine2: 'jasmine2/lib/jasmine-core/jasmine',
+      'jasmine2': 'jasmine2/lib/jasmine-core/jasmine',
       'promise-polyfill': 'promise-polyfill/Promise',
 
-      // Testing: old LaxarJS testing
-      'laxar/laxar_testing': 'laxar/dist/laxar_testing',
-      jquery: 'jquery/dist/jquery',
-      jasmine: 'jasmine/lib/jasmine-core/jasmine',
-      q_mock: 'q_mock/q'
+      'fetch': 'fetch/fetch'
    },
    packages: [
       {
@@ -81,6 +75,9 @@ var require = {
       // LaxarJS Patterns
       'json-patch': {
          exports: 'jsonpatch'
+      },
+      'fetch': {
+         deps: [ 'promise-polyfill' ]
       }
    }
 };

@@ -11,7 +11,16 @@
       "$schema": "http://json-schema.org/draft-04/schema#",
       "type": "object",
       "properties": {
-
+         "status": {
+            "type": "object",
+            "required": [ "url" ],
+            "properties": {
+               "url": {
+                  "type": "string",
+                  "description": "The URL to poll for build status updates."
+               }
+            }
+         }
       }
    }
 }

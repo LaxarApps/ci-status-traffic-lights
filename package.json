@@ -1,19 +1,20 @@
 {
-   "name": "ci-status-traffic-lights",
-   "version": "0.1.0-pre",
-   "description": "",
-   "license": "MIT",
-   "scripts": {
-      "test": "grunt test --force",
-      "prepublish": "bower install && grunt optimize",
-      "dist": "grunt dist",
-      "start": "grunt start",
-      "optimize": "grunt optimize"
-   },
-   "devDependencies": {
-      "bower": "~1.6.3",
-      "grunt": "~0.4.4",
-      "grunt-cli": "~0.1.13",
-      "grunt-laxar": "~1.1.0"
-   }
+  "name": "ci-status-traffic-lights",
+  "version": "0.1.0-pre",
+  "description": "",
+  "license": "MIT",
+  "scripts": {
+    "test": "grunt test --force",
+    "prepublish": "bower install && grunt optimize",
+    "dist": "grunt dist",
+    "start": "grunt start",
+    "optimize": "grunt optimize"
+  },
+  "devDependencies": {
+    "bower": "~1.6.3",
+    "grunt": "~0.4.4",
+    "grunt-cli": "~0.1.13",
+    "grunt-connect-proxy": "^0.2.0",
+    "grunt-laxar": "~1.1.0"
+  }
 }

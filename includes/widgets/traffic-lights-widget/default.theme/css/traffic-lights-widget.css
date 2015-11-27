@@ -6,17 +6,10 @@
 @charset "UTF-8";
 
 .traffic-lights-widget {
+   margin: 0.5em 0;
 }
 
-.traffic-lights-widget ol {
-   padding: 0;
-}
-
-.traffic-lights-widget > ol > li {
-   margin-bottom: 6px;
-}
-
-.traffic-lights-widget > ol > li:hover {
+.traffic-lights-widget:hover {
    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.2);
 }
 
@@ -27,30 +20,37 @@
    overflow: hidden;
 }
 
-.traffic-lights-widget li .indicator {
+.traffic-lights-widget .indicator {
    float: left;
    width: 4em;
    height: 4em;
    text-align: center;
 }
 
-.traffic-lights-widget li .activity {
+.traffic-lights-widget .activity {
    display: block;
    overflow: hidden;
-   max-height: 4em;
-   font-size: 0.9em;
-   line-height: 1.1;
+   height: 4em;
+}
+
+.traffic-lights-widget .activity .message {
 }
 
 .traffic-lights-widget .activity ol {
-   padding-left: 1ex;
-}
-
-.traffic-lights-widget li.expanded .activity {
+   padding: 0 1ex;
+   font-size: 0.9em;
+   line-height: 1.1;
+   margin: 0.1em 0;
 }
 
 .traffic-lights-widget .message {
+   transition: 0.3s ease-in transform;
    padding: 0.2em 1ex;
+   font-size: 0.9em;
+}
+
+.traffic-lights-widget .message.hide {
+   transform: translate(-100%, 0);
 }
 
 .traffic-lights-widget .v-fade {
@@ -65,17 +65,14 @@
    bottom: 0;
 }
 
-.traffic-lights-widget .progress,
-.traffic-lights-widget .checkmark,
-.traffic-lights-widget .alert {
+.traffic-lights-widget .indicator div {
    transition-property: width, height, border-radius, transform, transform-origin;
    transition-duration: 0.2s;
    transition-timing-function: ease-in-out;
+   margin: 0.5em;
 }
 
-.traffic-lights-widget .progress:after,
-.traffic-lights-widget .checkmark:after,
-.traffic-lights-widget .alert:after {
+.traffic-lights-widget .indicator div:after {
    transition-property: width, height, border-radius, transform, transform-origin;
    transition-duration: 0.2s;
    transition-timing-function: ease-in-out;
@@ -86,8 +83,7 @@
    display: block;
 }
 
-.traffic-lights-widget .progress {
-   margin: 0.5em;
+.traffic-lights-widget .indicator .pending {
    width: 1.5em;
    height: 3em;
    border: 3px solid;
@@ -97,7 +93,7 @@
    animation: progress 1s ease-in-out infinite;
 }
 
-.traffic-lights-widget .progress:after {
+.traffic-lights-widget .indicator .pending:after {
    width: 100%;
    height: 100%;
    border: 3px solid;
@@ -116,16 +112,16 @@
    }
 }
 
-.traffic-lights-widget .checkmark {
+.traffic-lights-widget .indicator .success {
    width: 0;
    height: 1.6em;
    border: 3px none;
    border-radius: 0;
-   transform: translate(0.9em, 1.5em) rotate(-45deg);
+   transform: translate(0.5em, 1.1em) rotate(-45deg);
    border-left: solid;
 }
 
-.traffic-lights-widget .checkmark:after {
+.traffic-lights-widget .indicator .success:after {
    width: 0;
    height: 100%;
    border: 3px none;
@@ -134,17 +130,16 @@
    border-left: solid;
 }
 
-.traffic-lights-widget .alert {
+.traffic-lights-widget .indicator .warning {
    width: 0;
-   margin-left: -1.5px;
    height: 1.6em;
    border: 3px none;
    border-radius: 0;
-   transform: translate(1.9em, 1.05em);
+   transform: translate(1.5em, 0.6em);
    border-left: solid;
 }
 
-.traffic-lights-widget .alert:after {
+.traffic-lights-widget .indicator .warning:after {
    width: 0;
    height: 100%;
    border: 3px none;
@@ -153,13 +148,31 @@
    border-left: solid;
 }
 
-.traffic-lights-widget .success {
+.traffic-lights-widget .indicator .failure {
+   width: 0;
+   height: 3.1em;
+   border: 3px none;
+   border-radius: 0;
+   transform: translate(1.5em, 0em) rotate(-45deg);
+   border-left: solid;
+}
+
+.traffic-lights-widget .indicator .failure:after {
+   width: 0;
+   height: 100%;
+   border: 3px none;
+   border-radius: 0;
+   transform: translate(0, 1.5px) rotate(90deg);
+   border-left: solid;
+}
+
+.traffic-lights-widget.success {
    background-color: #98e0a8;
    color: #28aa68;
 }
 
-.traffic-lights-widget .success .indicator,
-.traffic-lights-widget .success .message {
+.traffic-lights-widget.success .indicator,
+.traffic-lights-widget.success .message {
    background-color: #28a048;
    color: #28d068;
 }
@@ -174,7 +187,7 @@
    text-decoration: underline;
 }
 
-.traffic-lights-widget .success .v-fade:before {
+.traffic-lights-widget.success .v-fade:before {
    background: -webkit-linear-gradient(top,       transparent 0%, #98e0a8 100%);
    background:    -moz-linear-gradient(top,       transparent 0%, #98e0a8 100%);
    background:         linear-gradient(to bottom, transparent 0%, #98e0a8 100%);
@@ -185,18 +198,18 @@
    );
 }
 
-.traffic-lights-widget .failure {
+.traffic-lights-widget.failure {
    background-color: #e0a898;
    color: #d01818;
 }
 
-.traffic-lights-widget .failure .indicator,
-.traffic-lights-widget .failure .message {
+.traffic-lights-widget.failure .indicator,
+.traffic-lights-widget.failure .message {
    background-color: #d01818;
    color: #f0d8d8;
 }
 
-.traffic-lights-widget .failure .v-fade:before {
+.traffic-lights-widget.failure .v-fade:before {
    background: -webkit-linear-gradient(top,       transparent 0%, #e0a898 100%);
    background:    -moz-linear-gradient(top,       transparent 0%, #e0a898 100%);
    background:         linear-gradient(to bottom, transparent 0%, #e0a898 100%);

@@ -25,13 +25,33 @@ module.exports = function( grunt ) {
                livereload: liveReloadPort
             }
          }
+      },
+      connect: {
+         'laxar-develop': {
+            options: {
+               middleware: function( connect, options, middlewares ) {
+                  var proxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
+                  return [ proxy ].concat( middlewares );
+               }
+            },
+            proxies: [
+               {
+                  context: '/api',
+                  host: 'localhost',
+                  port: 1300,
+                  rewrite: {
+                     '^/api': '/'
+                  }
+               }
+            ]
+         }
       }
-
    } );
 
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
    grunt.loadNpmTasks( 'grunt-laxar' );
+   grunt.loadNpmTasks( 'grunt-connect-proxy' );
 
    // basic aliases
    grunt.registerTask( 'test', [ 'laxar-test' ] );
@@ -42,7 +62,7 @@ module.exports = function( grunt ) {
 
    // additional (possibly) more intuitive aliases
    grunt.registerTask( 'optimize', [ 'laxar-dist' ] );
-   grunt.registerTask( 'start', [ 'laxar-develop' ] );
+   grunt.registerTask( 'start', [ 'configureProxies:laxar-develop', 'laxar-develop' ] );
    grunt.registerTask( 'start-no-watch', [ 'laxar-develop-no-watch' ] );
 
    grunt.registerTask( 'default', [ 'build', 'test' ] );

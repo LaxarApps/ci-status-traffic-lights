@@ -11,7 +11,19 @@
       "content": [
         {
           "widget": "traffic-lights-widget",
-          "features": {}
+          "features": {
+             "status": {
+                "url": "/api/buildbot/builds"
+             }
+          }
+        },
+        {
+          "widget": "traffic-lights-widget",
+          "features": {
+             "status": {
+                "url": "/api/jenkins/builds"
+             }
+          }
         }
       ],
 
