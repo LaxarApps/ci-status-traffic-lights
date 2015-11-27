@@ -1,0 +1,17 @@
+{
+   "name": "traffic-lights-widget",
+   "description": "",
+
+   "integration": {
+      "technology": "plain",
+      "type": "widget"
+   },
+
+   "features": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "type": "object",
+      "properties": {
+
+      }
+   }
+}

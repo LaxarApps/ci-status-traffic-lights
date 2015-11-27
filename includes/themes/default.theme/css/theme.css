@@ -1,0 +1,33 @@
+body {
+   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+   font-size: 14px;
+   line-height: 1.42857;
+   color: #333;
+}
+
+* {
+   box-sizing: border-box;
+}
+
+.container {
+   margin: 15px;
+}
+
+@media (min-width: 768px) {
+   .container {
+      margin: 15px auto;
+      width: 750px;
+   }
+}
+
+@media (min-width: 1024px) {
+   .container {
+      width: 970px;
+   }
+}
+
+@media (min-width: 1280px) {
+   .container {
+      width: 1170px;
+   }
+}

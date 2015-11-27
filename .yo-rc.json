@@ -1,0 +1,10 @@
+{
+  "generator-laxarjs": {
+    "author": "",
+    "homepage": "laxarjs.org",
+    "licenses": [
+      "MIT"
+    ],
+    "laxarIntegrationTechnology": "plain"
+  }
+}

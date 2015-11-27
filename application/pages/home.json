@@ -1,0 +1,21 @@
+{
+   "layout": "application",
+
+   "areas": {
+      "activities": [
+      ],
+
+      "header": [
+      ],
+
+      "content": [
+        {
+          "widget": "traffic-lights-widget",
+          "features": {}
+        }
+      ],
+
+      "footer": [
+      ]
+   }
+}
