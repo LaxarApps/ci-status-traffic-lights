@@ -6,36 +6,29 @@
 define( [], function() {
    'use strict';
 
+   var UNKNOWN = 'unknown';
+   var PENDING = 'pending';
+   var FAILURE = 'failure';
    var STATES = [
-      'pending',
+      UNKNOWN,
       'success',
       'warning',
-      'failure',
-      'errored'
+      FAILURE,
+      'errored',
+      PENDING
    ];
+   var POLL_INTERVAL = 10000;
 
    return {
       name: 'traffic-lights-widget',
       injections: [ 'axContext' ],
       create: function( context ) {
+         var timeout;
          var element;
-         var indicators = [];
 
          var builds = [];
+         var messages = [];
          var state = updateStates( builds );
-         var update;
-
-         function getIndicatorClass() {
-            return STATES[ Math.floor( Math.random() * STATES.length ) ];
-         }
-
-         function delegate( event ) {
-            indicators.forEach( function( indicator ) {
-               if( indicator === event.target || indicator.contains( event.target ) ) {
-                  indicator.childNodes[1].className = getIndicatorClass();
-               }
-            } );
-         };
 
          function updateStates( builds ) {
             var state = STATES.reduce( function( state, name ) {
@@ -60,16 +53,30 @@ define( [], function() {
          }
 
          context.eventBus.subscribe( 'beginLifecycleRequest', function() {
-            fetch( context.features.status.url )
-               .then( function( response ) {
-                  return response.json();
-               } )
-               .then( function( data ) {
-                  builds = data;
-                  state = updateStates( data );
-
-                  render( element );
+            function poll() {
+               return update().then( function() {
+                  if( requestAnimationFrame ) {
+                     return new Promise( function( resolve, reject ) {
+                        requestAnimationFrame( function() {
+                           if( element ) {
+                              render();
+                           }
+                           resolve();
+                        } );
+                     } );
+                  } else {
+                     return render();
+                  }
+               } ).then( function() {
+                  timeout = setTimeout( poll, POLL_INTERVAL );
                } );
+            }
+
+            poll();
+         } );
+
+         context.eventBus.subscribe( 'endLifecycleRequest', function() {
+            clearTimeout( timeout );
          } );
 
          function replaceChildren( element, nodes ) {
@@ -79,30 +86,98 @@ define( [], function() {
             nodes.forEach( element.appendChild, element );
          }
 
-         function buildElement( build ) {
-            var element = document.createElement( 'li' );
-            var text = document.createTextNode( 'Build ' + build.state + ': ' + build.name + ' #' + build.number + '' );
+         function buildLink( build ) {
+            var element = document.createElement( 'a' );
+            var text = document.createTextNode( build.name + ' #' + build.number );
+            element.href = build.html_url;
             element.appendChild( text );
             return element;
          }
 
+         function buildElement( build ) {
+            var element = document.createElement( 'li' );
+            var link = buildLink( build );
+            var text = [
+               document.createTextNode( 'Build ' + build.state + ': ' ),
+               link
+            ];
+            element.appendChild( text[ 0 ] );
+            element.appendChild( text[ 1 ] );
+            return element;
+         }
+
          function messageElement( build ) {
+            var element = document.createElement( 'div' );
+            var link = buildLink( build );
+            var text;
+
+            element.className = 'message';
+
+            switch( build.state ) {
+               case 'pending':
+                  text = [
+                     document.createTextNode( 'Currently building ' ),
+                     link
+                  ];
+                  break;
+               case 'success':
+                  text = [
+                     link,
+                     document.createTextNode( ' succeeded' )
+                  ];
+                  break;
+               case 'failure':
+                  text = [
+                     link,
+                     document.createTextNode( ' failed' )
+                  ];
+                  break;
+               default:
+                  return null;
+            }
+            text.forEach( element.appendChild, element );
+            return element;
          }
 
-         function bind( e ) {
+         function textMessageElement( text ) {
+            var element = document.createElement( 'div' );
+            element.className = 'message';
+            element.appendChild( document.createTextNode( text ) );
+            return element;
+         }
+
+         function init( e ) {
             element = e;
-            element.addEventListener( 'click', delegate );
-            [].push.apply( indicators, element.querySelectorAll( '.indicator' ) );
          }
 
-         function render( element ) {
-            var activity = element.querySelector( '.activity ol' );
+         function update() {
+            return fetch( context.features.status.url )
+               .then( function( response ) {
+                  if( response.status !== 200 ) {
+                     return Promise.reject();
+                  }
+                  return response.json();
+               } )
+               .then( function( data ) {
+                  builds = data;
+                  state = updateStates( data );
+               }, function() {
+                  builds = [];
+                  state = updateStates( [] );
+                  messages.push( textMessageElement( 'Failed updating build status.' ) );
+               } );
+         }
+
+         function render() {
             var indicator = element.querySelector( '.indicator div' );
+            var activity = element.querySelector( '.activity' );
+            var message = activity.querySelector( '.message' );
+            var list = activity.querySelector( 'ol' );
             var worst = 0;
 
-            replaceChildren( activity, builds.map( buildElement ) );
+            replaceChildren( list, builds.map( buildElement ) );
 
-            Object.keys( state ).forEach(function ( name ) {
+            Object.keys( state ).forEach( function ( name ) {
                var builds = state[ name ];
                var index = STATES.indexOf( name );
                if( builds.length ) {
@@ -113,15 +188,33 @@ define( [], function() {
                }
             } );
 
-            indicator.className = STATES[ worst ];
+            if( message ) {
+               activity.removeChild( message );
+            }
+
+            if( STATES[ worst ] === UNKNOWN ) {
+               indicator.className = messages.length ? FAILURE : PENDING;
+               element.classList.add( PENDING );
+               messages.push( textMessageElement( 'Fetching build status…' ) );
+            } else {
+               indicator.className = STATES[ worst ];
+
+               message = messageElement( state[ STATES[ worst ] ][ 0 ] );
+               if( message ) {
+                  messages.push( message );
+               }
+            }
+            message = messages.shift();
+            if( message ) {
+               activity.insertBefore( message, list );
+            }
          }
 
          return {
             renderTo: function( element ) {
                // `element` is the instantiated template of the widget, already attached to the page DOM
-               bind( element );
-               render( element );
-               update = render.bind( null, element );
+               init( element );
+               render();
             }
          };
       }

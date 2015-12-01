@@ -166,6 +166,27 @@
    border-left: solid;
 }
 
+.traffic-lights-widget a {
+   text-decoration: none;
+   color: inherit;
+   opacity: 1;
+}
+
+.traffic-lights-widget a:hover {
+   text-decoration: underline;
+}
+
+.traffic-lights-widget.pending {
+   background-color: #d8d2d0;
+   color: #a8a2a0;
+}
+
+.traffic-lights-widget.pending .indicator,
+.traffic-lights-widget.pending .message {
+   background-color: #a8a2a0;
+   color: #d8d2d0;
+}
+
 .traffic-lights-widget.success {
    background-color: #98e0a8;
    color: #28aa68;
@@ -175,16 +196,6 @@
 .traffic-lights-widget.success .message {
    background-color: #28a048;
    color: #28d068;
-}
-
-.traffic-lights-widget a {
-   text-decoration: none;
-   color: inherit;
-   opacity: 1;
-}
-
-.traffic-lights-widget a:hover {
-   text-decoration: underline;
 }
 
 .traffic-lights-widget.success .v-fade:before {
