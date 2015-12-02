@@ -37,7 +37,9 @@ define( [], function() {
             }, {} );
 
             var builders = builds.reduce( function( builders, build, index ) {
-               if( !builders.hasOwnProperty( build.name ) ) {
+               if( build.state === PENDING ) {
+                  state[ PENDING ].push( build );
+               } else if( !builders.hasOwnProperty( build.name ) ) {
                   builders[ build.name ] = index;
                }
                return builders;
@@ -124,6 +126,12 @@ define( [], function() {
                   text = [
                      link,
                      document.createTextNode( ' succeeded' )
+                  ];
+                  break;
+               case 'warning':
+                  text = [
+                     document.createTextNode( 'Warnings during build ' ),
+                     link
                   ];
                   break;
                case 'failure':
