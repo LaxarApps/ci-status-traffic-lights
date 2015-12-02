@@ -30,7 +30,15 @@
 .traffic-lights-widget .activity {
    display: block;
    overflow: hidden;
-   height: 4em;
+   min-height: 4em;
+   max-height: 4em;
+   transition-property: background-color, color, max-height;
+   transition-duration: 0.3s;
+   transition-timing-function: ease-out;
+}
+
+.traffic-lights-widget.expanded .activity {
+   max-height: 20em;
 }
 
 .traffic-lights-widget .activity .message {
@@ -57,14 +65,19 @@
 
 .traffic-lights-widget .v-fade {
    position: relative;
+   cursor: s-resize;
 }
 
 .traffic-lights-widget .v-fade:before {
    content: "";
    position: absolute;
    width: 100%;
-   height: 30%;
+   height: 1em;
    bottom: 0;
+}
+
+.traffic-lights-widget.expanded .v-fade {
+   cursor: n-resize;
 }
 
 .traffic-lights-widget .indicator div {

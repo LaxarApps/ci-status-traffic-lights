@@ -17,6 +17,7 @@ define( [], function() {
       'errored',
       PENDING
    ];
+   var EXPANDED = 'expanded';
    var POLL_INTERVAL = 10000;
 
    return {
@@ -156,6 +157,13 @@ define( [], function() {
 
          function init( e ) {
             element = e;
+            element.querySelector( '.v-fade' ).addEventListener( 'click', function( event ) {
+               if( element.classList.contains( EXPANDED ) ) {
+                  element.classList.remove( EXPANDED );
+               } else {
+                  element.classList.add( EXPANDED );
+               }
+            } );
          }
 
          function update() {
