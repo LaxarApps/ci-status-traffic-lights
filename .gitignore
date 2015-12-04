@@ -7,3 +7,5 @@ atlassian-ide-plugin.xml
 /bower_components
 *.backup.json
 ci-status-traffic-lights-*.zip
+npm-debug.log
+config.json

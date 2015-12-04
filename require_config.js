@@ -6,18 +6,16 @@ var require = {
    ],
    paths: {
       // LaxarJS Core and dependencies:
-      laxar: 'laxar/dist/laxar.with-deps',
+      laxar: 'laxar/dist/laxar',
       requirejs: 'requirejs/require',
       text: 'requirejs-plugins/lib/text',
       json: 'requirejs-plugins/src/json',
       angular: 'angular/angular',
-      'angular-mocks': 'angular-mocks/angular-mocks',
       'angular-route': 'angular-route/angular-route',
       'angular-sanitize': 'angular-sanitize/angular-sanitize',
 
-      // LaxarJS Patterns:
-      'laxar-patterns': 'laxar-patterns/dist/laxar-patterns',
-      'json-patch': 'fast-json-patch/src/json-patch-duplex',
+      'jjv': 'jjv/lib/jjv',
+      'jjve': 'jjve/jjve',
 
       // LaxarJS application paths:
       'laxar-path-root': '..',
@@ -31,11 +29,8 @@ var require = {
       // LaxarJS application modules (contents are generated):
       'laxar-application-dependencies': '../var/flows/main/dependencies',
 
-      // Testing: LaxarJS Mocks:
-      'laxar-mocks': 'laxar-mocks/dist/laxar-mocks',
-      'jasmine2': 'jasmine2/lib/jasmine-core/jasmine',
+      // Polyfills
       'promise-polyfill': 'promise-polyfill/Promise',
-
       'fetch': 'fetch/fetch'
    },
    packages: [
@@ -71,10 +66,6 @@ var require = {
             'use strict';
             return angular;
          }
-      },
-      // LaxarJS Patterns
-      'json-patch': {
-         exports: 'jsonpatch'
       },
       'fetch': {
          deps: [ 'promise-polyfill' ]

@@ -1,0 +1,43 @@
+{
+  "host": null,
+  "port": null,
+  "cache": {
+    "size": 30,
+    "maxAge": 10000
+  },
+  "routes": [
+    {
+      "route": "/buildbot",
+      "adapters": [
+        {
+          "type": "buildbot",
+          "url": "http://buildbot.buildbot.net"
+        }
+      ]
+    },
+    {
+      "route": "/jenkins",
+      "adapters": [
+        {
+          "type": "jenkins",
+          "url": "https://ci.jenkins-ci.org",
+          "options": {
+            "view": "Jenkins core"
+          }
+        }
+      ]
+    },
+    {
+      "route": "/travis",
+      "adapters": [
+        {
+          "type": "travis",
+          "url": "https://api.travis-ci.org",
+          "options": {
+            "account": "travis-ci"
+          }
+        }
+      ]
+    }
+  ]
+}

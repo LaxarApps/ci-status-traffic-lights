@@ -13,6 +13,7 @@ module.exports = function( grunt ) {
 
    grunt.initConfig( {
       pkg: grunt.file.readJSON( 'package.json' ),
+      cfg: grunt.file.readJSON( 'config.json' ),
 
       'laxar-configure': {
          options: {
@@ -30,20 +31,13 @@ module.exports = function( grunt ) {
          'laxar-develop': {
             options: {
                middleware: function( connect, options, middlewares ) {
-                  var proxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
-                  return [ proxy ].concat( middlewares );
+                  var compression = require('compression');
+                  var relay = require('ci-relay');
+                  var config = grunt.config.get('cfg');
+
+                  return [ compression(), relay.config(config) ].concat( middlewares );
                }
-            },
-            proxies: [
-               {
-                  context: '/api',
-                  host: 'localhost',
-                  port: 1300,
-                  rewrite: {
-                     '^/api': '/'
-                  }
-               }
-            ]
+            }
          }
       }
    } );
@@ -62,7 +56,7 @@ module.exports = function( grunt ) {
 
    // additional (possibly) more intuitive aliases
    grunt.registerTask( 'optimize', [ 'laxar-dist' ] );
-   grunt.registerTask( 'start', [ 'configureProxies:laxar-develop', 'laxar-develop' ] );
+   grunt.registerTask( 'start', [ 'laxar-develop' ] );
    grunt.registerTask( 'start-no-watch', [ 'laxar-develop-no-watch' ] );
 
    grunt.registerTask( 'default', [ 'build', 'test' ] );
