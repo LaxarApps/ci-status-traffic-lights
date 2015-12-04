@@ -104,6 +104,7 @@ define( [], function() {
                document.createTextNode( 'Build ' + build.state + ': ' ),
                link
             ];
+            element.className = build.state;
             element.appendChild( text[ 0 ] );
             element.appendChild( text[ 1 ] );
             return element;
@@ -158,6 +159,7 @@ define( [], function() {
          function init( e ) {
             element = e;
             element.querySelector( '.v-fade' ).addEventListener( 'click', function( event ) {
+               if( event.target.nodeName === 'A' ) return;
                if( element.classList.contains( EXPANDED ) ) {
                   element.classList.remove( EXPANDED );
                } else {
