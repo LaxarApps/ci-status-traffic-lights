@@ -59,6 +59,18 @@ module.exports = function( grunt ) {
                }
             } ]
          }
+      },
+      watch: {
+         sass: {
+            files: [
+               'includes/themes/*.theme/scss/*.scss',
+               'includes/widgets/**/*.theme/scss/*.scss'
+            ],
+            tasks: [ 'sass' ],
+            options: {
+               livereload: false
+            }
+         }
       }
    } );
 
