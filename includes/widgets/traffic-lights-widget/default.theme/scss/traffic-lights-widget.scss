@@ -10,8 +10,8 @@ $pending-primary-color: #d8d2d0;
 $pending-secondary-background: #d8d2d0;
 $pending-secondary-color: #a8a2a0;
 
-$success-primary-background: #28a048;
-$success-primary-color: #28d068;
+$success-primary-background: #28b048;
+$success-primary-color: #28e868;
 $success-secondary-background: #98e0a8;
 $success-secondary-color: #28aa68;
 
@@ -20,10 +20,10 @@ $warning-primary-color: #f0e8c8;
 $warning-secondary-background: #e8c888;
 $warning-secondary-color: #e08808;
 
-$failure-primary-background: #d01818;
-$failure-primary-color: #f0d8d8;
-$failure-secondary-background: #e0a898;
-$failure-secondary-color: #d01818;
+$failure-primary-background: #e02818;
+$failure-primary-color: #f0d0b8;
+$failure-secondary-background: #f0a888;
+$failure-secondary-color: #e02818;
 
 .traffic-lights-widget {
    margin: 0.5em 0;
@@ -42,13 +42,6 @@ $failure-secondary-color: #d01818;
       }
    }
 
-   li {
-      list-style: none;
-      width: 100%;
-      display: block;
-      overflow: hidden;
-   }
-
    .indicator {
       float: left;
       width: 4em;
@@ -64,13 +57,25 @@ $failure-secondary-color: #d01818;
       transition-property: background-color, color, max-height;
       transition-duration: 0.3s;
       transition-timing-function: ease-out;
+      cursor: s-resize;
    }
 
    .activity ol {
       padding: 0 1ex;
       font-size: 0.9em;
-      line-height: 1.1;
+      line-height: 1.15;
       margin: 0.1em 0;
+   }
+
+   li {
+      list-style-type: none;
+      width: 100%;
+      overflow: hidden;
+
+      &.warning,
+      &.failure {
+         font-weight: bold;
+      }
    }
 
    .message {
@@ -87,13 +92,12 @@ $failure-secondary-color: #d01818;
 
    .v-fade {
       position: relative;
-      cursor: s-resize;
 
       &:before {
          content: "";
          position: absolute;
          width: 100%;
-         height: 1em;
+         height: 0.7em;
          bottom: 0;
       }
    }
@@ -101,15 +105,12 @@ $failure-secondary-color: #d01818;
    &.expanded {
       .activity {
          max-height: 20em;
-      }
-
-      .v-fade {
          cursor: n-resize;
-
+         overflow-y: auto;
       }
 
-      v-fade:before {
-         height: 10%;
+      .v-fade:before {
+         display: none;
       }
    }
 }
