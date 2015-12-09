@@ -151,10 +151,10 @@
     background: #a8a2a0;
     color: #d8d2d0; }
   .traffic-lights-widget.pending .v-fade:before {
-    background: -webkit-linear-gradient(top, rgba(216, 210, 208, 0), #d8d2d0 100%);
-    background: -moz-linear-gradient(top, rgba(216, 210, 208, 0), #d8d2d0 100%);
-    background: linear-gradient(to bottom, rgba(216, 210, 208, 0), #d8d2d0 100%);
-    background: progid:DXImageTransform.Microsoft.gradient( gradientType=1, startColorStr='#00D8D2D0', endColorStr='#FFD8D2D0' ); }
+    background-image: -webkit-linear-gradient(top, rgba(216, 210, 208, 0), #d8d2d0 100%);
+    background-image: -moz-linear-gradient(top, rgba(216, 210, 208, 0), #d8d2d0 100%);
+    background-image: linear-gradient(to bottom, rgba(216, 210, 208, 0), #d8d2d0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( gradientType=1, startColorStr='#00D8D2D0', endColorStr='#FFD8D2D0' ); }
 
 .traffic-lights-widget.success {
   background: #98e0a8;
@@ -164,10 +164,10 @@
     background: #28a048;
     color: #28d068; }
   .traffic-lights-widget.success .v-fade:before {
-    background: -webkit-linear-gradient(top, rgba(152, 224, 168, 0), #98e0a8 100%);
-    background: -moz-linear-gradient(top, rgba(152, 224, 168, 0), #98e0a8 100%);
-    background: linear-gradient(to bottom, rgba(152, 224, 168, 0), #98e0a8 100%);
-    background: progid:DXImageTransform.Microsoft.gradient( gradientType=1, startColorStr='#0098E0A8', endColorStr='#FF98E0A8' ); }
+    background-image: -webkit-linear-gradient(top, rgba(152, 224, 168, 0), #98e0a8 100%);
+    background-image: -moz-linear-gradient(top, rgba(152, 224, 168, 0), #98e0a8 100%);
+    background-image: linear-gradient(to bottom, rgba(152, 224, 168, 0), #98e0a8 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( gradientType=1, startColorStr='#0098E0A8', endColorStr='#FF98E0A8' ); }
 
 .traffic-lights-widget.warning {
   background: #e8c888;
@@ -177,10 +177,10 @@
     background: #e08808;
     color: #f0e8c8; }
   .traffic-lights-widget.warning .v-fade:before {
-    background: -webkit-linear-gradient(top, rgba(232, 200, 136, 0), #e8c888 100%);
-    background: -moz-linear-gradient(top, rgba(232, 200, 136, 0), #e8c888 100%);
-    background: linear-gradient(to bottom, rgba(232, 200, 136, 0), #e8c888 100%);
-    background: progid:DXImageTransform.Microsoft.gradient( gradientType=1, startColorStr='#00E8C888', endColorStr='#FFE8C888' ); }
+    background-image: -webkit-linear-gradient(top, rgba(232, 200, 136, 0), #e8c888 100%);
+    background-image: -moz-linear-gradient(top, rgba(232, 200, 136, 0), #e8c888 100%);
+    background-image: linear-gradient(to bottom, rgba(232, 200, 136, 0), #e8c888 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( gradientType=1, startColorStr='#00E8C888', endColorStr='#FFE8C888' ); }
 
 .traffic-lights-widget.failure {
   background: #e0a898;
@@ -190,9 +190,9 @@
     background: #d01818;
     color: #f0d8d8; }
   .traffic-lights-widget.failure .v-fade:before {
-    background: -webkit-linear-gradient(top, rgba(224, 168, 152, 0), #e0a898 100%);
-    background: -moz-linear-gradient(top, rgba(224, 168, 152, 0), #e0a898 100%);
-    background: linear-gradient(to bottom, rgba(224, 168, 152, 0), #e0a898 100%);
-    background: progid:DXImageTransform.Microsoft.gradient( gradientType=1, startColorStr='#00E0A898', endColorStr='#FFE0A898' ); }
+    background-image: -webkit-linear-gradient(top, rgba(224, 168, 152, 0), #e0a898 100%);
+    background-image: -moz-linear-gradient(top, rgba(224, 168, 152, 0), #e0a898 100%);
+    background-image: linear-gradient(to bottom, rgba(224, 168, 152, 0), #e0a898 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( gradientType=1, startColorStr='#00E0A898', endColorStr='#FFE0A898' ); }
 
 /*# sourceMappingURL=traffic-lights-widget.css.map */
