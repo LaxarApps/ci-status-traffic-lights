@@ -24,6 +24,9 @@ module.exports = function( grunt ) {
                develop: serverPort,
                test: testPort,
                livereload: liveReloadPort
+            },
+            userTasks: {
+               'build-flow': [ 'laxar-sass' ]
             }
          }
       },
@@ -39,13 +42,42 @@ module.exports = function( grunt ) {
                }
             }
          }
+      },
+      sass: {
+         options: {
+            sourceMap: true
+         },
+         main: {
+            files: [ {
+               expand: true,
+               src: [
+                  'includes/themes/*.theme/scss/*.scss',
+                  'includes/widgets/**/*.theme/scss/*.scss'
+               ],
+               rename: function (dest, src) {
+                  return src.replace(/\/scss\/(.*)\.scss$/, '/css/$1.css');
+               }
+            } ]
+         }
       }
    } );
 
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+   /**
+    * Unfortunately, grunt-laxar hijacks the files setting, effectively overriding anything configured
+    * with grunt.initConfig(), so we can't call sass directly. Instead, we hook up this intermediate step
+    * that does nothing except calling sass with the users configuration.
+    */
+   grunt.registerMultiTask( 'laxar-sass', 'Because grunt-laxar is annoying', function () {
+      this.files;
+      grunt.task.run( 'sass:' + this.target );
+   } );
+
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
    grunt.loadNpmTasks( 'grunt-laxar' );
-   grunt.loadNpmTasks( 'grunt-connect-proxy' );
+   grunt.loadNpmTasks( 'grunt-sass' );
 
    // basic aliases
    grunt.registerTask( 'test', [ 'laxar-test' ] );
