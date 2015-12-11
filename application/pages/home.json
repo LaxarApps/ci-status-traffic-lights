@@ -12,6 +12,7 @@
         {
           "widget": "traffic-lights-widget",
           "features": {
+             "title": "Travis",
              "status": {
                 "url": "/api/travis/builds"
              }
@@ -20,6 +21,7 @@
         {
           "widget": "traffic-lights-widget",
           "features": {
+             "title": "Jenkins",
              "status": {
                 "url": "/api/jenkins/builds"
              }
@@ -28,6 +30,7 @@
         {
           "widget": "traffic-lights-widget",
           "features": {
+             "title": "Buildbot",
              "status": {
                 "url": "/api/buildbot/builds"
              }

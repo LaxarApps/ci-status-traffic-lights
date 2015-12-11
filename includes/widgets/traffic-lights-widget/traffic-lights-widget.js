@@ -142,6 +142,12 @@ define( [], function() {
                      document.createTextNode( ' failed' )
                   ];
                   break;
+               case 'errored':
+                  text = [
+                     link,
+                     document.createTextNode( ' errored' )
+                  ];
+                  break;
                default:
                   return null;
             }
@@ -187,12 +193,14 @@ define( [], function() {
          }
 
          function render() {
+            var title = element.querySelector( '.title' );
             var indicator = element.querySelector( '.indicator div' );
             var activity = element.querySelector( '.activity' );
             var message = activity.querySelector( '.message' );
             var list = activity.querySelector( 'ol' );
             var worst = 0;
 
+            replaceChildren( title, [ document.createTextNode( context.features.title || '' ) ] );
             replaceChildren( list, builds.map( buildElement ) );
 
             Object.keys( state ).forEach( function ( name ) {

@@ -4,6 +4,7 @@
  * laxarjs.org
  */
 .traffic-lights-widget {
+  position: relative;
   margin: 0.5em 0; }
   .traffic-lights-widget:hover {
     box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.2); }
@@ -13,6 +14,15 @@
     opacity: 1; }
     .traffic-lights-widget a:hover {
       text-decoration: underline; }
+  .traffic-lights-widget .title {
+    position: absolute;
+    height: 4em;
+    left: -1.2em;
+    top: 0.3ex;
+    -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+    -webkit-transform: rotate(-90deg) translate(-100%, 0);
+            transform: rotate(-90deg) translate(-100%, 0); }
   .traffic-lights-widget .indicator {
     float: left;
     width: 4em;
@@ -23,9 +33,12 @@
     overflow: hidden;
     min-height: 4em;
     max-height: 4em;
-    transition-property: background-color, color, max-height;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-out;
+    -webkit-transition-property: background-color, color, max-height;
+            transition-property: background-color, color, max-height;
+    -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
     cursor: s-resize; }
   .traffic-lights-widget .activity ol {
     padding: 0 1ex;
@@ -41,11 +54,13 @@
   .traffic-lights-widget .message {
     white-space: nowrap;
     overflow: hidden;
-    transition: 0.3s ease-in transform;
+    -webkit-transition: 0.3s ease-in -webkit-transform;
+            transition: 0.3s ease-in transform;
     padding: 0.2em 1ex;
     font-size: 0.9em; }
   .traffic-lights-widget .message.hide {
-    transform: translate(-100%, 0); }
+    -webkit-transform: translate(-100%, 0);
+            transform: translate(-100%, 0); }
   .traffic-lights-widget .v-fade {
     position: relative; }
     .traffic-lights-widget .v-fade:before {
@@ -54,6 +69,8 @@
       width: 100%;
       height: 0.7em;
       bottom: 0; }
+  .traffic-lights-widget.expanded .title {
+    height: 20em; }
   .traffic-lights-widget.expanded .activity {
     max-height: 20em;
     cursor: n-resize;
@@ -62,25 +79,41 @@
     display: none; }
 
 .traffic-lights-widget .indicator div {
-  transition-property: width, height, border-radius, transform, transform-origin;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
+  -webkit-transition-property: width, height, border-radius, -webkit-transform, -webkit-transform-origin;
+          transition-property: width, height, border-radius, transform, transform-origin;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-in-out;
+          transition-timing-function: ease-in-out;
   margin: 0.5em; }
   .traffic-lights-widget .indicator div:after {
-    transition-property: width, height, border-radius, transform, transform-origin;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
+    -webkit-transition-property: width, height, border-radius, -webkit-transform, -webkit-transform-origin;
+            transition-property: width, height, border-radius, transform, transform-origin;
+    -webkit-transition-duration: 0.2s;
+            transition-duration: 0.2s;
+    -webkit-transition-timing-function: ease-in-out;
+            transition-timing-function: ease-in-out;
     position: relative;
     content: "";
     left: -3px;
     top: -3px;
     display: block; }
 
+@-webkit-keyframes progress {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
 @keyframes progress {
   from {
-    transform: rotate(0deg); }
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
   to {
-    transform: rotate(360deg); } }
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
 
 .traffic-lights-widget .indicator .pending {
   width: 1.5em;
@@ -88,30 +121,36 @@
   border: 3px solid;
   border-radius: 3em 0 0 3em;
   border-right: none;
-  transform-origin: 100% 50%;
-  animation: progress 1s ease-in-out infinite; }
+  -webkit-transform-origin: 100% 50%;
+          transform-origin: 100% 50%;
+  -webkit-animation: progress 1s ease-in-out infinite;
+          animation: progress 1s ease-in-out infinite; }
   .traffic-lights-widget .indicator .pending:after {
     width: 100%;
     height: 100%;
     border: 3px solid;
     border-radius: 3em 0 0 3em;
-    transform-origin: 100% 50%;
+    -webkit-transform-origin: 100% 50%;
+            transform-origin: 100% 50%;
     border-right: none;
-    animation: progress 2s ease-in-out infinite; }
+    -webkit-animation: progress 2s ease-in-out infinite;
+            animation: progress 2s ease-in-out infinite; }
 
 .traffic-lights-widget .indicator .success {
   width: 0;
   height: 1.6em;
   border: 3px none;
   border-radius: 0;
-  transform: translate(0.5em, 1.1em) rotate(-45deg);
+  -webkit-transform: translate(0.5em, 1.1em) rotate(-45deg);
+          transform: translate(0.5em, 1.1em) rotate(-45deg);
   border-left: solid; }
   .traffic-lights-widget .indicator .success:after {
     width: 0;
     height: 100%;
     border: 3px none;
     border-radius: 0;
-    transform: translate(1.25em, 0.97em) scale(1.7, 1) rotate(90deg);
+    -webkit-transform: translate(1.25em, 0.97em) scale(1.7, 1) rotate(90deg);
+            transform: translate(1.25em, 0.97em) scale(1.7, 1) rotate(90deg);
     border-left: solid; }
 
 .traffic-lights-widget .indicator .warning {
@@ -119,14 +158,16 @@
   height: 1.6em;
   border: 3px none;
   border-radius: 0;
-  transform: translate(1.5em, 0.6em);
+  -webkit-transform: translate(1.5em, 0.6em);
+          transform: translate(1.5em, 0.6em);
   border-left: solid; }
   .traffic-lights-widget .indicator .warning:after {
     width: 0;
     height: 100%;
     border: 3px none;
     border-radius: 0;
-    transform: translate(0, 1.35em) scale(1, 0.15);
+    -webkit-transform: translate(0, 1.35em) scale(1, 0.15);
+            transform: translate(0, 1.35em) scale(1, 0.15);
     border-left: solid; }
 
 .traffic-lights-widget .indicator .failure {
@@ -134,14 +175,16 @@
   height: 3.1em;
   border: 3px none;
   border-radius: 0;
-  transform: translate(1.5em, 0em) rotate(-45deg);
+  -webkit-transform: translate(1.5em, 0em) rotate(-45deg);
+          transform: translate(1.5em, 0em) rotate(-45deg);
   border-left: solid; }
   .traffic-lights-widget .indicator .failure:after {
     width: 0;
     height: 100%;
     border: 3px none;
     border-radius: 0;
-    transform: translate(0, 1.5px) rotate(90deg);
+    -webkit-transform: translate(0, 1.5px) rotate(90deg);
+            transform: translate(0, 1.5px) rotate(90deg);
     border-left: solid; }
 
 .traffic-lights-widget.pending {
@@ -153,7 +196,6 @@
     color: #d8d2d0; }
   .traffic-lights-widget.pending .v-fade:before {
     background-image: -webkit-linear-gradient(top, rgba(216, 210, 208, 0), #d8d2d0 100%);
-    background-image: -moz-linear-gradient(top, rgba(216, 210, 208, 0), #d8d2d0 100%);
     background-image: linear-gradient(to bottom, rgba(216, 210, 208, 0), #d8d2d0 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( gradientType=1, startColorStr='#00D8D2D0', endColorStr='#FFD8D2D0' ); }
 
@@ -166,7 +208,6 @@
     color: #28e868; }
   .traffic-lights-widget.success .v-fade:before {
     background-image: -webkit-linear-gradient(top, rgba(152, 224, 168, 0), #98e0a8 100%);
-    background-image: -moz-linear-gradient(top, rgba(152, 224, 168, 0), #98e0a8 100%);
     background-image: linear-gradient(to bottom, rgba(152, 224, 168, 0), #98e0a8 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( gradientType=1, startColorStr='#0098E0A8', endColorStr='#FF98E0A8' ); }
 
@@ -179,7 +220,6 @@
     color: #f0e8c8; }
   .traffic-lights-widget.warning .v-fade:before {
     background-image: -webkit-linear-gradient(top, rgba(232, 200, 136, 0), #e8c888 100%);
-    background-image: -moz-linear-gradient(top, rgba(232, 200, 136, 0), #e8c888 100%);
     background-image: linear-gradient(to bottom, rgba(232, 200, 136, 0), #e8c888 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( gradientType=1, startColorStr='#00E8C888', endColorStr='#FFE8C888' ); }
 
@@ -192,8 +232,5 @@
     color: #f0d0b8; }
   .traffic-lights-widget.failure .v-fade:before {
     background-image: -webkit-linear-gradient(top, rgba(240, 168, 136, 0), #f0a888 100%);
-    background-image: -moz-linear-gradient(top, rgba(240, 168, 136, 0), #f0a888 100%);
     background-image: linear-gradient(to bottom, rgba(240, 168, 136, 0), #f0a888 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( gradientType=1, startColorStr='#00F0A888', endColorStr='#FFF0A888' ); }
-
-/*# sourceMappingURL=traffic-lights-widget.css.map */

@@ -34,11 +34,10 @@ module.exports = function( grunt ) {
          'laxar-develop': {
             options: {
                middleware: function( connect, options, middlewares ) {
-                  var compression = require('compression');
                   var relay = require('ci-relay');
                   var config = grunt.config.get('cfg');
 
-                  return [ compression(), relay.config(config) ].concat( middlewares );
+                  return [ relay.config(config) ].concat( middlewares );
                }
             }
          }
@@ -56,6 +55,20 @@ module.exports = function( grunt ) {
                ],
                rename: function (dest, src) {
                   return src.replace(/\/scss\/(.*)\.scss$/, '/css/$1.css');
+               }
+            } ]
+         }
+      },
+      autoprefixer: {
+         main: {
+            files: [ {
+               expand: true,
+               src: [
+                  'includes/themes/*.theme/css/*.css',
+                  'includes/widgets/**/*.theme/css/*.css'
+               ],
+               rename: function (dest, src) {
+                  return src;
                }
             } ]
          }
@@ -84,12 +97,14 @@ module.exports = function( grunt ) {
    grunt.registerMultiTask( 'laxar-sass', 'Because grunt-laxar is annoying', function () {
       this.files;
       grunt.task.run( 'sass:' + this.target );
+      grunt.task.run( 'autoprefixer:' + this.target );
    } );
 
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
    grunt.loadNpmTasks( 'grunt-laxar' );
    grunt.loadNpmTasks( 'grunt-sass' );
+   grunt.loadNpmTasks( 'grunt-autoprefixer' );
 
    // basic aliases
    grunt.registerTask( 'test', [ 'laxar-test' ] );
