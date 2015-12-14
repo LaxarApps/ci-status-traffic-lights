@@ -60,6 +60,11 @@ module.exports = function( grunt ) {
          }
       },
       autoprefixer: {
+         options: {
+            map: {
+               inline: false
+            }
+         },
          main: {
             files: [ {
                expand: true,
@@ -79,7 +84,7 @@ module.exports = function( grunt ) {
                'includes/themes/*.theme/scss/*.scss',
                'includes/widgets/**/*.theme/scss/*.scss'
             ],
-            tasks: [ 'sass' ],
+            tasks: [ 'sass', 'autoprefixer' ],
             options: {
                livereload: false
             }

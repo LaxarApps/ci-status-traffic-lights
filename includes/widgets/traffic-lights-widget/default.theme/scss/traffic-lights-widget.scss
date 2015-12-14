@@ -67,9 +67,7 @@ $failure-secondary-color: #e02818;
       overflow: hidden;
       min-height: $collapsed-height;
       max-height: $collapsed-height;
-      transition-property: background-color, color, max-height;
-      transition-duration: 0.3s;
-      transition-timing-function: ease-out;
+      transition: max-height 0.3s ease-out;
       cursor: s-resize;
    }
 
@@ -249,11 +247,13 @@ $failure-secondary-color: #e02818;
 }
 
 @mixin colors($primary-background, $primary-color, $secondary-background, $secondary-color) {
+   transition: background-color 1s ease-out, color 1s ease-out;
    background: $secondary-background;
    color: $secondary-color;
 
    & .indicator,
    & .message {
+      transition: background-color 1s ease-out, color 1s ease-out;
       background: $primary-background;
       color: $primary-color;
    }
