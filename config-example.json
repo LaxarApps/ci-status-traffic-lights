@@ -1,6 +1,4 @@
 {
-  "host": null,
-  "port": null,
   "cache": {
     "size": 30,
     "maxAge": 10000
@@ -11,7 +9,10 @@
       "adapters": [
         {
           "type": "buildbot",
-          "url": "http://buildbot.buildbot.net"
+          "url": "http://buildbot.buildbot.net",
+          "options": {
+            "tag": "config"
+          }
         }
       ]
     },
